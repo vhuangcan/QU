@@ -8,7 +8,7 @@
 
 !(() => {
   const name = '豆奶签到'
-  console.log(`${name}开始执行`)
+  console.log(`${name}开始执行！`)
   const url = `https://www.v2e.fun/user/checkin`;
   const method = `POST`;
   const headers = {
@@ -33,11 +33,11 @@
   $task.fetch(myRequest).then(response => {
     console.log(`${JSON.parse(JSON.stringify(response.body))}`)
     $notify(name, '成功！')
-
+    console.log(`签到执行结束！`)
     $done();
   }, response => {
     console.log('', `❌ ${name}, 失败! 原因: ${response.error}!`, '')
-    $notify(name, '失败')
+    $notify(name, '失败！')
     $done();
   });
 })()
