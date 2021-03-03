@@ -31,16 +31,20 @@
     body: body
   };
   $task.fetch(myRequest).then(response => {
-    console.log(`${JSON.parse(JSON.stringify(response.body))}`)
-    $notify(name, '成功！')
-    console.log(`签到执行结束！`)
-    $done();
-  }, response => {
-    console.log('', `❌ ${name}, 失败! 原因: ${response.error}!`, '')
-    $notify(name, '失败！')
-    $done();
-  });
+        const str = JSON.stringify(response.body)
+        console.log(`${unescape(str.replace(/\\u/g, "%u").replace(/\\/g, ''))}`)
+        $notify(name, '成功！')
+        console.log(`签到执行结束！`)
+        $done();
+      }, response => {
+        console.log('',
+            `❌ ${name}, 失败! 原因: ${response.error}!`
+            , '')
+        $notify(name, '失败！')
+        $done();
+      });
 })()
+
 
 
 
