@@ -7,54 +7,38 @@
  */
 const $ = new Env('豆奶签到')
 
-!(async () => {
-  $.log('', `🔔 ${$.name}, 开始!`, '')
-  await sign()
-  await showMsg()
-})()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.msg($.name, $.subt)
-      $.log('', `🔔 ${$.name}, 结束!`, '')
-      $.done()
-    })
+$.log('', `🔔 ${$.name}, 开始!`, '')
+const url = `https://www.v2e.fun/user/checkin`;
+const method = `POST`;
+const headers = {
+  'Accept' : `application/json, text/javascript, */*; q=0.01`,
+  'Accept-Encoding' : `gzip, deflate, br`,
+  'Origin' : `https://www.v2e.fun`,
+  'Cookie' : `email=304591874%40qq.com; expire_in=1617347672; ip=8351ace6e0cb060a3ff9811ecfa95e7a; key=5e48b96fcb47c0992c2140b5167cb38323825a98d2697; uid=53151; __cfduid=deb2a93203aa2f2b2ed5ac9c80907c50f1614755641`,
+  'Connection' : `keep-alive`,
+  'Host' : `www.v2e.fun`,
+  'User-Agent' : `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
+  'Referer' : `https://www.v2e.fun/user/panel`,
+  'Accept-Language' : `zh-cn`,
+  'X-Requested-With' : `XMLHttpRequest`
+};
+const body = ``;
+const myRequest = {
+  url: url,
+  method: method,
+  headers: headers,
+  body: body
+};
 
-function sign() {
-  return new Promise((resolve) => {
-    const data = {
-      'url': 'https://www.v2e.fun/user/checkin',
-      'Accept': `application/json, text/javascript, */*; q=0.01`,
-      'Accept-Encoding': `gzip, deflate, br`,
-      'Origin': `https://www.v2e.fun`,
-      'Cookie': `email=304591874%40qq.com; expire_in=1617347672; ip=8351ace6e0cb060a3ff9811ecfa95e7a; key=5e48b96fcb47c0992c2140b5167cb38323825a98d2697; uid=53151; __cfduid=deb2a93203aa2f2b2ed5ac9c80907c50f1614755641`,
-      'Connection': `keep-alive`,
-      'Host': `www.v2e.fun`,
-      'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
-      'Referer': `https://www.v2e.fun/user/panel`,
-      'Accept-Language': `zh-cn`,
-      'X-Requested-With': `XMLHttpRequest`
-    };
-    $.log(`${data}`)
-    $.post(data, (error, response, data) => {
-      try {
-        $.log(`${JSON.stringify(data)}`,`${JSON.stringify(response)}`)
-      } catch (e) {
-        $.log(`❗️ ${$.name}, 执行失败!`, ` error = ${error || e}`, `response = ${JSON.stringify(response)}`, '')
-      } finally {
-        resolve()
-      }
-    })
-  })
-}
-
-function showMsg() {
-  return new Promise((resolve) => {
-    $.subt = '签到成功！'
-    resolve()
-  })
-}
+$task.fetch(myRequest).then(response => {
+  $.log(`${response.statusCode + "\\n\\n" + response.body}`)
+  $.msg($.name, '成功！')
+  $done();
+}, response => {
+  $.log('', `❌ ${$.name}, 失败! 原因: ${response.error}!`, '')
+  $.msg($.name, '失败')
+  $done();
+});
 
 // prettier-ignore
 function Env(t) {
