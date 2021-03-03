@@ -1,0 +1,7 @@
+{
+  "name": "huangCan",
+  "description": "https://github.com/vhuangcan/QU",
+  "task": [
+    "1 0 * * * https://raw.githubusercontent.com/vhuangcan/QU/master/test.js, tag=douDou, img-url=https://avatars.githubusercontent.com/u/35123370?s=460&u=6dfc017c299e0bb17dafd84061a15c532c703ef0&v=4, enabled=true"
+  ]
+}
