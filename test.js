@@ -9,10 +9,7 @@ const $ = new Env('豆奶签到')
 
 !(async () => {
   $.log('', `🔔 ${$.name}, 开始!`, '')
-  // init()
-  // await signweb()
-  // await signapp()
-  // await getInfo()
+  await sign
   await showMsg
 })()
     .catch((e) => {
@@ -23,51 +20,33 @@ const $ = new Env('豆奶签到')
       $.log('', `🔔 ${$.name}, 结束!`, '')
       $.done()
     })
-//
-// function init() {
-//   $.isNewCookie = /https:\/\/music.163.com\/weapi\/user\/level/.test($.VAL_session)
-//   $.Cookie = $.isNewCookie ? JSON.parse($.VAL_session).headers.Cookie : $.VAL_session
-// }
-//
-//
-// async function signapp() {
-//   for (let signIdx = 0; signIdx < $.CFG_retryCnt; signIdx++) {
-//     await new Promise((resove) => {
-//       const url = {url: `http://music.163.com/api/point/dailyTask?type=0`, headers: {}}
-//       url.headers['Cookie'] = $.Cookie
-//       url.headers['Host'] = 'music.163.com'
-//       url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1'
-//       $.get(url, (error, response, data) => {
-//         try {
-//           $.isAppSuc = JSON.parse(data).code === -2
-//           $.log(`[App] 第 ${signIdx + 1} 次: ${data}`)
-//         } catch (e) {
-//           $.isAppSuc = false
-//           $.log(`❗️ ${$.name}, 执行失败!`, ` error = ${error || e}`, `response = ${JSON.stringify(response)}`, '')
-//         } finally {
-//           resove()
-//         }
-//       })
-//     })
-//     await new Promise($.wait($.CFG_retryInterval))
-//     if ($.isAppSuc) break
-//   }
-// }
-//
-// function getInfo() {
-//   if (!$.isNewCookie) return
-//   return new Promise((resove) => {
-//     $.post(JSON.parse($.VAL_session), (error, response, data) => {
-//       try {
-//         $.userInfo = JSON.parse(data)
-//       } catch (e) {
-//         $.log(`❗️ ${$.name}, 执行失败!`, ` error = ${error || e}`, `response = ${JSON.stringify(response)}`, '')
-//       } finally {
-//         resove()
-//       }
-//     })
-//   })
-// }
+
+function sign() {
+  return new Promise((resolve) => {
+    const data = {
+      'url': 'https://www.v2e.fun/user/checkin',
+      'Accept': `application/json, text/javascript, */*; q=0.01`,
+      'Accept-Encoding': `gzip, deflate, br`,
+      'Origin': `https://www.v2e.fun`,
+      'Cookie': `email=304591874%40qq.com; expire_in=1617347672; ip=8351ace6e0cb060a3ff9811ecfa95e7a; key=5e48b96fcb47c0992c2140b5167cb38323825a98d2697; uid=53151; __cfduid=deb2a93203aa2f2b2ed5ac9c80907c50f1614755641`,
+      'Connection': `keep-alive`,
+      'Host': `www.v2e.fun`,
+      'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
+      'Referer': `https://www.v2e.fun/user/panel`,
+      'Accept-Language': `zh-cn`,
+      'X-Requested-With': `XMLHttpRequest`
+    };
+    $.post(data, (error, response, data) => {
+      try {
+        $.log(`${data.msg}`)
+      } catch (e) {
+        $.log(`❗️ ${$.name}, 执行失败!`, ` error = ${error || e}`, `response = ${JSON.stringify(response)}`, '')
+      } finally {
+        resolve()
+      }
+    })
+  })
+}
 
 function showMsg() {
   return new Promise((resolve) => {
@@ -96,3 +75,5 @@ function Env(t) {
     }, t => i(t.error, t, t)))
   }), this.done = ((t = {}) => $done(t))
 }
+
+
