@@ -31,8 +31,9 @@
     body: body
   };
   $task.fetch(myRequest).then(response => {
-    console.log(`${JSON.stringify(response.body)}`)
+    console.log(`${JSON.parse(JSON.stringify(response.body))}`)
     $notify(name, '成功！')
+
     $done();
   }, response => {
     console.log('', `❌ ${name}, 失败! 原因: ${response.error}!`, '')
