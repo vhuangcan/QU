@@ -8,9 +8,8 @@
 
 !(() => {
   // $prefs.valueForKey()
-  // $prefs.valueForKey()
+  // $prefs.setValueForKey()
   const name = '豆奶签到'
-
   console.log(`${name}开始执行！`)
   const url = `https://www.v2e.fun/user/checkin`;
   const method = `POST`;
@@ -34,6 +33,7 @@
     body: body
   };
   $task.fetch(myRequest).then(response => {
+        console.log(JSON.stringify(response.headers))
         const str = JSON.stringify(response.body)
         console.log(`${unescape(str.replace(/\\u/g, "%u").replace(/\\/g, ''))}`)
         $notify(name, '成功！')
