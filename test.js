@@ -36,6 +36,7 @@ function sign() {
       'Accept-Language': `zh-cn`,
       'X-Requested-With': `XMLHttpRequest`
     };
+    $.log(`${data}`)
     $.post(data, (error, response, data) => {
       try {
         $.log(`${data.msg}`)
