@@ -31,7 +31,7 @@ const myRequest = {
 };
 
 $task.fetch(myRequest).then(response => {
-  $.log(`${response.statusCode + "\\n\\n" + response.body}`)
+  $.log(`${JSON.parse(response.body)}`)
   $.msg($.name, '成功！')
   $done();
 }, response => {
