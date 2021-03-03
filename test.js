@@ -39,7 +39,7 @@ function sign() {
     $.log(`${data}`)
     $.post(data, (error, response, data) => {
       try {
-        $.log(`${data.msg}`,`${JSON.stringify(response)}`)
+        $.log(`${JSON.parse(data)}`,`${JSON.stringify(response)}`)
       } catch (e) {
         $.log(`❗️ ${$.name}, 执行失败!`, ` error = ${error || e}`, `response = ${JSON.stringify(response)}`, '')
       } finally {
