@@ -7,9 +7,10 @@
  */
 
 !(() => {
-  $prefs
+  // $prefs.valueForKey()
+  // $prefs.valueForKey()
   const name = '豆奶签到'
-  $prefs.valueForKey()
+
   console.log(`${name}开始执行！`)
   const url = `https://www.v2e.fun/user/checkin`;
   const method = `POST`;
