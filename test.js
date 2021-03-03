@@ -9,8 +9,8 @@ const $ = new Env('豆奶签到')
 
 !(async () => {
   $.log('', `🔔 ${$.name}, 开始!`, '')
-  await sign
-  await showMsg
+  await sign()
+  await showMsg()
 })()
     .catch((e) => {
       $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
