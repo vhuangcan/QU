@@ -30,7 +30,7 @@ const myRequest = {
 };
 
 $task.fetch(myRequest).then(response => {
-  console.log(`${JSON.parse(response.body)}`)
+  console.log(`${JSON.stringify(response.body)}`)
   $notify(name, '成功！')
   $done();
 }, response => {
