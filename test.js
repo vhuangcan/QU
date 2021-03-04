@@ -57,17 +57,7 @@
   const checkIn = () => {
     fetch({
       url: 'https://aaaa.gay/user/checkin',
-      method: 'POST',
-      headers: {
-        'Accept': `application/json, text/javascript, */*; q=0.01`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Origin': `https://aaaa.gay`,
-        'Host': `aaaa.gay`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
-        'Referer': `https://aaaa.gay/user/panel`,
-        'Accept-Language': `zh-cn`,
-        'X-Requested-With': `XMLHttpRequest`
-      }
+      method: 'POST'
     }).then(res => {
       const str = stringify(res.body);
       log(parse(str));
