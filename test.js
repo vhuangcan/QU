@@ -6,7 +6,7 @@
  * tips:
  */
 
-(async () => {
+(() => {
   const log = (msg) => console.log(msg)
   const notify = (m, i) => $notify(m, i)
   const set = (k, v) => $prefs.setValueForKey(k, v)
@@ -18,7 +18,7 @@
   const name = '豆奶签到'
   log(`${name}开始执行！`)
   const signIn = () => {
-    return fetch({
+    fetch({
       url: 'https://aaaa.gay/auth/login',
       method: 'POST',
       headers: {
@@ -37,12 +37,15 @@
     }).then(res => {
       const str = stringify(res.body)
       log(`${parse(str)}`)
-      log(stringify(res.headers))
+      checkIn()
+      done()
+    }, reason => {
+      log(reason.error)
       done()
     })
   }
   const checkIn = () => {
-    return fetch({
+    fetch({
       url: 'https://aaaa.gay/user/checkin',
       method: 'POST',
       headers: {
@@ -54,29 +57,20 @@
         'Referer': `https://aaaa.gay/user/panel`,
         'Accept-Language': `zh-cn`,
         'X-Requested-With': `XMLHttpRequest`
-      },
-      body: ''
+      }
     }).then(res => {
-      log(stringify(res.headers))
       const str = stringify(res.body)
       log(parse(str))
       notify(name, '成功！')
       log(`签到执行结束！`)
       done()
+    }, reason => {
+      log(reason.error)
+      signIn()
     })
   }
-  // signIn()
   checkIn()
-  // const ex = get('expire')
-  // if (ex) {
-  //
-  // }
-  // log(isExpire)
 })()
-    .catch((e) => {
-      console.log('失败原因:', e)
-    })
-
 
 
 
