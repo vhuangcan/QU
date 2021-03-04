@@ -15,7 +15,6 @@
   const name = '豆奶签到'
   log(`${name}开始执行！`)
   const signIn = () => {
-
     return fetch({
       url: 'https://aaaa.gay/auth/login',
       method: 'POST',
@@ -37,6 +36,8 @@
       console.log(`${unescape(str.replace(/\\u/g, "%u").replace(/\\/g, ''))}`)
     })
   }
+
+  signIn()
   // const ex = get('expire')
   // if (ex) {
   //
