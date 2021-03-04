@@ -6,15 +6,42 @@
  * tips:
  */
 
-!(() => {
+(async () => {
   const log = (msg) => console.log(msg)
   const notify = (msg) => $notify(msg)
   const set = (k, v) => $prefs.setValueForKey(k, v)
   const get = (k) => $prefs.valueForKey(k)
+  const fetch = (data) => $task.fetch(data)
   const name = '豆奶签到'
   log(`${name}开始执行！`)
-  const isExpire = get('expire')
-   log(isExpire)
+  const signIn = () => {
+
+    return fetch({
+      url: 'https://aaaa.gay/auth/login',
+      method: 'POST',
+      headers: {
+        'X-Requested-With': `XMLHttpRequest`,
+        'Connection': `keep-alive`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Content-Type': `application/x-www-form-urlencoded; charset=UTF-8`,
+        'Origin': `https://aaaa.gay`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
+        'Host': `aaaa.gay`,
+        'Referer': `https://aaaa.gay/auth/login`,
+        'Accept-Language': `zh-cn`,
+        'Accept': `application/json, text/javascript, */*; q=0.01`
+      },
+      body: 'email=513416443%40qq.com&passwd=12345678'
+    }).then(res => {
+      const str = JSON.stringify(res.body)
+      console.log(`${unescape(str.replace(/\\u/g, "%u").replace(/\\/g, ''))}`)
+    })
+  }
+  // const ex = get('expire')
+  // if (ex) {
+  //
+  // }
+  // log(isExpire)
   return
   const url = `https://www.v2e.fun/user/checkin`;
   const method = `POST`;
@@ -50,7 +77,9 @@
     $done();
   });
 })()
-
+    .catch((e) => {
+      console.log('失败原因:', e)
+    })
 
 
 
