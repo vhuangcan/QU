@@ -57,9 +57,9 @@
       },
       body: ''
     }).then(res => {
-      console.log(JSON.stringify(res.headers))
-      const str = JSON.stringify(res.body)
-      log(`${unescape(str.replace(/\\u/g, "%u").replace(/\\/g, ''))}`)
+      log(stringify(res.headers))
+      const str = stringify(res.body)
+      log(parse(str))
       notify(name, '成功！')
       log(`签到执行结束！`)
       done()
