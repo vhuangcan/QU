@@ -22,17 +22,22 @@
       url: 'https://aaaa.gay/auth/login',
       method: 'POST',
       headers: {
+        'X-Requested-With': `XMLHttpRequest`,
+        'Connection': `keep-alive`,
+        'Accept-Encoding': `gzip, deflate, br`,
         'Content-Type': `application/x-www-form-urlencoded; charset=UTF-8`,
         'Origin': `https://aaaa.gay`,
         'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
         'Host': `aaaa.gay`,
-        'Referer': `https://aaaa.gay/auth/login`
+        'Referer': `https://aaaa.gay/auth/login`,
+        'Accept-Language': `zh-cn`,
+        'Accept': `application/json, text/javascript, */*; q=0.01`
       },
       body: 'email=513416443%40qq.com&passwd=12345678'
     }).then(res => {
       const str = stringify(res.body)
-      log(stringify(res.headers))
       log(`${parse(str)}`)
+      log(stringify(res.headers))
       done()
     })
   }
@@ -43,26 +48,25 @@
       headers: {
         'Accept': `application/json, text/javascript, */*; q=0.01`,
         'Accept-Encoding': `gzip, deflate, br`,
-        'Origin': `https://www.v2e.fun`,
-        'Cookie': `uid=5329; email=513416443%40qq.com; key=9f21897805252c987bab48f1abd1c58253b62027a568e; ip=90df72bd0cf7fdf4e983a9efbee301fe; expire_in=1617351631`,
-        'Connection': `keep-alive`,
-        'Host': `www.v2e.fun`,
+        'Origin': `https://aaaa.gay`,
+        'Host': `aaaa.gay`,
         'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1`,
-        'Referer': `https://www.v2e.fun/user/panel`,
+        'Referer': `https://aaaa.gay/user/panel`,
         'Accept-Language': `zh-cn`,
         'X-Requested-With': `XMLHttpRequest`
       },
       body: ''
     }).then(res => {
       console.log(JSON.stringify(res.headers))
-      const str = JSON.stringify(es.body)
+      const str = JSON.stringify(res.body)
       log(`${unescape(str.replace(/\\u/g, "%u").replace(/\\/g, ''))}`)
       notify(name, '成功！')
       log(`签到执行结束！`)
       done()
     })
   }
-  signIn()
+  // signIn()
+  checkIn()
   // const ex = get('expire')
   // if (ex) {
   //
